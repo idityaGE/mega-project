@@ -1,5 +1,5 @@
 import { Client, Account, ID } from "appwrite";
-import conf from "../conf/conf.js";
+import conf from "/src/conf/conf.js";
 
 
 //by using this class method to define our auth service, we can easily switch to another auth service in the future just by changing the implementation of this class

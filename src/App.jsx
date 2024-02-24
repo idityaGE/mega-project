@@ -1,10 +1,50 @@
+import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import authService from './appwrite/auth/auth'
+import { login, logout } from './store/authSlice'
+import LoadingPage from './components/LoadingPage/LoadingPage'
+import { Outlet } from 'react-router-dom'
+import Header from './components/Header/Header.jsx'
+import Footer from './components/Footer/Footer.jsx'
+
+
 
 
 function App() {
-console.log(import.meta.env.VITE_APPWRITE_URL)
+  const [loading, setLoading] = useState(true)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    authService.getCurrentUser()
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }))
+        }
+        else {
+          dispatch(logout())
+        }
+        setLoading(false)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [])
+
+  if (loading) {
+    return <LoadingPage />
+  }
   return (
     <>
-      <h1>Appwrite</h1>
+      <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+        <div className='w-full block'>
+          <Header />
+          <main>
+            <Outlet/>
+          </main>
+          <Footer />
+        </div>
+      </div>
     </>
   )
 }
