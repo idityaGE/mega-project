@@ -24,29 +24,25 @@ function App() {
         else {
           dispatch(logout())
         }
-        setLoading(false)
       })
       .finally(() => {
         setLoading(false)
       })
   }, [])
 
-  if (loading) {
-    return <LoadingPage />
-  }
-  return (
-    <>
-      <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
-        <div className='w-full block'>
-          <Header />
-          <main>
-            <Outlet/>
-          </main>
-          <Footer />
+  loading ? <LoadingPage /> : (
+      <>
+        <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+          <div className='w-full block'>
+            <Header />
+            <main>
+              <Outlet />
+            </main>
+            <Footer />
+          </div>
         </div>
-      </div>
-    </>
-  )
+      </>
+    )
 }
 
 export default App

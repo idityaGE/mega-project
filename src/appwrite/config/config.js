@@ -3,7 +3,6 @@ import { Client, ID, Databases, Storage, Query } from "appwrite";
 
 export class Service {
     client = new Client();
-    account;
     databases;
     storage;
     query;
@@ -11,7 +10,6 @@ export class Service {
         this.client
             .setEndpoint(conf.appwriteUrl)
             .setProject(conf.appwriteProjectId);
-        this.account = new Account(this.client);
         this.databases = new Databases(this.client);
         this.storage = new Storage(this.client);
         this.query = new Query(this.client);
@@ -87,7 +85,7 @@ export class Service {
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 queries,
-                100,//limit
+                // 100,//limit
             );
         } catch (error) {
             console.log("Service -> getPosts -> error", error)
