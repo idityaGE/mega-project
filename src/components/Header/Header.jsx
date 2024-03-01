@@ -35,11 +35,11 @@ export default function Header() {
                     <ul className='flex ml-auto'>
                         {navItems.map((item) =>
                             item.active ? (
-                                <li key={item.name}>
+                                <li key={item.label}>
                                     <button
                                         className='px-4 py-2 text-white duration-200 hover:bg-gray-400 rounded-full'
                                         onClick={() => navigate(item.to)}>
-                                        {item.name}
+                                        {item.label}
                                     </button>
                                 </li>
                             ) : null

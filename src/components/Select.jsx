@@ -20,7 +20,7 @@ function Select({
                 {...rest}
                 id={id}
             >
-                {option.map((option) =>
+                {option?.map((option) =>//"option?" if option is not null then map through the options if its null then don't map
                     <option
                         key={option}
                         value={option}
