@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Logo from '../Logo'
 import Container from '../container/Container'
 import { useNavigate } from 'react-router-dom'
+import authSlice from '../../store/authSlice'
 
 
 
@@ -12,7 +13,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 export default function Header() {
-    const authStatus = useSelector((state) => state.auth.status)
+    const authStatus = useSelector((state) => state.status)
     const navigate = useNavigate()
 
     const navItems = [

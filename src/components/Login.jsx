@@ -12,28 +12,26 @@ import { useDispatch } from 'react-redux'
 
 
 
+
 function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
-    const [error, setError] = useState('')
+    const [error, setError] = useState("")
 
     const login = async (data) => {
-        setError('')
+        setError("")
         try {
-            const session = await authService.login(data.email, data.password)
+            const session = await authService.login(data)
             if (session) {
                 const userData = await authService.getCurrentUser()
-                if (userData) {
-                    dispatch(login({ userData }))
-                    navigate('/')
-                }
+                if (userData) dispatch(login(userData));
+                navigate("/")
             }
         } catch (error) {
-            setError('Invalid credentials', error.message)
+            setError(error.message)
         }
     }
-
 
     return (
         <div

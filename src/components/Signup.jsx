@@ -8,30 +8,26 @@ import Logo from './Logo'
 import { useForm } from 'react-hook-form'
 import authService from '../appwrite/auth/auth'
 
+
 function Signup() {
     const navigate = useNavigate()
+    const [error, setError] = useState("")
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
-    const [error, setError] = useState('')
 
     const create = async (data) => {
-        setError('')
+        setError("")
         try {
-            const userData = await authService.createAccount(data.email, data.password, data.name)
+            const userData = await authService.createAccount(data)
             if (userData) {
                 const userData = await authService.getCurrentUser()
-                if (userData) {
-                    dispatch(login({ userData }))
-                    navigate('/')
-                }
+                if (userData) dispatch(login(userData));
+                navigate("/")
             }
         } catch (error) {
-            setError('Invalid credentials', error.message)
+            setError(error.message)
         }
     }
-
-
-
 
     return (
         <div className="flex items-center justify-center">
@@ -75,7 +71,7 @@ function Signup() {
                             })}
                         />
                         <Input
-                            label="Password: "
+                            label="password "
                             type="password"
                             placeholder="Enter your password"
                             {...register("password", {
@@ -88,6 +84,7 @@ function Signup() {
                     </div>
                 </form>
             </div>
+
         </div>
     )
 }
