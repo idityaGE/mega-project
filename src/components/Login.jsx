@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { login } from '../store/authSlice'
+import { login as authLogin } from '../store/authSlice'
 import Button from './Button'
 import Input from './Input'
 import Logo from './Logo'
-import service from '../appwrite/config/config'
 import { useForm } from 'react-hook-form'
 import authService from '../appwrite/auth/auth'
 import { useDispatch } from 'react-redux'
@@ -25,7 +24,7 @@ function Login() {
             const session = await authService.login(data)
             if (session) {
                 const userData = await authService.getCurrentUser()
-                if (userData) dispatch(login(userData));
+                if (userData) dispatch(authLogin(userData));
                 navigate("/")
             }
         } catch (error) {

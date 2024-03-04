@@ -99,8 +99,7 @@ export class Service {
             return await this.storage.createFile(
                 conf.appwriteBucketId,
                 ID.unique(),//file id
-                file,
-                ["*"]//allow anyone to read the file
+                file
             );
         } catch (error) {
             console.log("Service -> uploadFile -> error", error)
